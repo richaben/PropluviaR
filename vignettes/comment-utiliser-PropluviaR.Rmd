@@ -90,7 +90,7 @@ Pour les limites départementales, le package `COGiter` est utilisé.
 
 Voici un exemple de carte &#x1F5FA;&#xFE0F; avec les données récupérées ! 
 
-```{r, fig.width=5.5, fig.height=4, dpi=150, dev='ragg_png', message=FALSE, warning=FALSE}
+```{r, fig.width=5.5, fig.height=4, dpi=150, message=FALSE, warning=FALSE}
 # installation si manquant
 #devtools::install_github("MaelTheuliere/COGiter")
 library(COGiter)
