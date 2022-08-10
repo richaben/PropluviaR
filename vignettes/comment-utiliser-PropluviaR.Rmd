@@ -1,0 +1,128 @@
+---
+title: "Comment utiliser PropluviaR ?"
+author: 
+  - B. Richard (benoit.richard@ofb.gouv.fr)
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Comment utiliser PropluviaR ?}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  echo = TRUE,
+  eval = TRUE
+)
+# library(COGiter)
+# library(sf)
+```
+
+## Pourquoi ce package ?
+
+Le package `PropluviaR` tente de faciliter la récupération des données [Propluvia](https://propluvia.developpement-durable.gouv.fr/propluviapublic/accueil) sur les restrictions d'eau. 
+
+Le but est de récupérer les informations sur les zones d'alerte, selon les niveaux de gravité, notamment pour une utilisation sous SIG. 
+
+Il utilise les données d'une API sur le (nouveau) site [Propluvia](https://propluvia.developpement-durable.gouv.fr/propluviapublic/accueil) (l'ancien se trouve sur le [lien ici](http://propluvia.developpement-durable.gouv.fr/propluvia/faces/index.jsp)).
+
+## Installation et chargement du package
+
+```{r setup, echo=T, eval=F}
+# installation si nécessaire, à partir du dépôt github
+if (!require("devtools")) install.packages("devtools")
+devtools::install_github("richaben/PropluviaR")
+```
+
+```{r, echo=T, eval=T}
+# Chargement du package
+library(PropluviaR)
+```
+
+## Utilisation
+
+Le package `PropluviaR` permet de télécharger les données :
+
+- à la date du jour (par défaut, si non précisé) ;
+- à une date antérieure lorsqu'elle est spécifiée (&#x26A0;&#xFE0F; doit être au format [annee-mois-jour] (ex: 2022-07-23)) ;
+
+L'option `export` permet de sauvegarder les résultats en créant une couche au format geopackage `.gkpg`, utilisable sous SIG.
+
+### Exemples
+
+```{r, eval=F}
+## pour les données à la date du 23 juillet 2022 ; sans export
+propluvia_data_20220723 <- 
+  get_propluvia(date = '2022-07-23', export = FALSE)
+
+## pour les données du jour ; sans export.
+propluvia_data_jour <- 
+  get_propluvia(export = FALSE)
+```
+
+```{r, eval=F}
+## pour exporter/créer une couche (à récupérer dans le dossier de travail)
+get_propluvia(export = TRUE)
+```
+
+
+### Exemple d'une représentation cartographique
+
+Quelques autres packages sont utiles pour la représentation cartographique : `tidyverse` et `sf`.
+
+```{r, eval=T, message=FALSE, warning= FALSE}
+## installation packages si manquants
+# if (!require("tidyverse")) install.packages("tidyverse")
+# if (!require("sf")) install.packages("sf")
+
+# chargement packages
+library(ggplot2)
+library(dplyr)
+library(magrittr)
+library(sf)
+```
+
+Pour les limites départementales, le package `COGiter` est utilisé.
+
+
+Voici un exemple de carte &#x1F5FA;&#xFE0F; avec les données récupérées ! 
+
+```{r, fig.width=5.5, fig.height=4, dpi=150, dev='ragg_png', message=FALSE, warning=FALSE}
+# installation si manquant
+#devtools::install_github("MaelTheuliere/COGiter")
+library(COGiter)
+
+# shape pour les departements FR métropolitaine
+dept_shp <- 
+  departements_geo %>% 
+  filter(!DEP %in% c("971", "972", "973", "974", "976"))
+
+# les données Propluvia du jour !
+propluvia_data_jour <- 
+  get_propluvia(export = FALSE)
+
+# palette de couleur
+pal_colZone <- 
+  setNames(unique(propluvia_data_jour$colSeuil),
+           unique(propluvia_data_jour$nomNiveau))
+
+# le graphique
+plot_propluvia <-
+  ggplot() +
+  geom_sf(data = (propluvia_data_jour %>% 
+                    filter(typeZone == 'SUP')),
+          aes(fill=nomNiveau),
+          col='black',size=0.1) +
+  scale_fill_manual(values = pal_colZone, "Zones d'alerte") +
+  geom_sf(data = dept_shp, col='black', size=0.6, fill=NA) +
+  labs(title = paste0("Carte Propluvia au ", format(Sys.time(),"%d/%m/%Y")), 
+       caption = "Source: http://propluvia.developpement-durable.gouv.fr") +
+  theme_void() +
+  theme(title = element_text(face = 'bold'))
+
+plot_propluvia  
+```
+
