@@ -19,7 +19,7 @@ une date spécifiée.
 L’export des données collectées est possible par la création d’une
 couche `.gpkg` pour une utilisation SIG.
 
-## Installation
+## Installation ⚙️
 
 Pour l’installer :
 
@@ -29,11 +29,5 @@ devtools::install_github("richaben/PropluviaR")
 ```
 
 ## Exemple 🗺️
-
-    #> 
-    #> ── Récupération des données Propluvia ──────────────────────────────────────────
-    #> ℹ Téléchargement <https://eau.api.agriculture.gouv.fr/apis/propluvia/zones/2022-08-10>
-    #> ℹ Assemblage des données
-    #> No encoding supplied: defaulting to UTF-8.
 
 <img src="man/figures/README-propluvia-1.png" width="100%" />
