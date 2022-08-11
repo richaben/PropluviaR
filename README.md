@@ -6,7 +6,8 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/richaben/PropluviaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/richaben/PropluviaR/actions/workflows/R-CMD-check.yaml)
-[![test-coverage](https://github.com/richaben/PropluviaR/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/richaben/PropluviaR/actions/workflows/test-coverage.yaml)
+[![License: GPL
+v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 <!-- badges: end -->
 
 Le package `PropluviaR` vise à faciliter la récupération des données
