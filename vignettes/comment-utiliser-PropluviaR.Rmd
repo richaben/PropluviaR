@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
   echo = TRUE,
   eval = TRUE
 )
+if (!require("devtools")) install.packages("devtools")
 # library(COGiter)
 # library(sf)
 ```
@@ -74,20 +75,18 @@ Quelques autres packages sont utiles pour la représentation cartographique : `t
 
 ```{r, eval=T, message=FALSE, warning= FALSE}
 ## installation packages si manquants
-# if (!require("tidyverse")) install.packages("tidyverse")
-# if (!require("sf")) install.packages("sf")
+if (!require("tidyverse")) install.packages("tidyverse")
+if (!require("sf")) install.packages("sf")
 
 # chargement des packages
-library(ggplot2)
-library(dplyr)
-library(magrittr)
+library(tidyverse)
 library(sf)
 ```
 
 Pour les limites départementales, le package `COGiter` est utilisé.
 
 ```{r , eval=T, message=FALSE, warning= FALSE}
-#devtools::install_github("MaelTheuliere/COGiter")
+if (!require("COGiter")) devtools::install_github("MaelTheuliere/COGiter")
 library(COGiter)
 ```
 
