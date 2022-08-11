@@ -35,7 +35,7 @@ Il utilise les données d'une API sur le (nouveau) site [Propluvia](https://prop
 ```{r setup, echo=T, eval=F}
 # installation si nécessaire, à partir du dépôt github
 if (!require("devtools")) install.packages("devtools")
-devtools::install_github("richaben/PropluviaR")
+devtools::install_github("richaben/PropluviaR", build_vignettes = T)
 ```
 
 ```{r, echo=T, eval=T}
@@ -71,15 +71,17 @@ get_propluvia(export = TRUE)
 
 ### Exemple d'une représentation cartographique &#x1F5FA;&#xFE0F;
 
-Quelques autres packages sont utiles pour la représentation cartographique : `tidyverse` et `sf`.
+Quelques autres packages sont utiles pour la représentation cartographique : `ggplot2`, `dplyr` et `sf`.
 
 ```{r, eval=T, message=FALSE, warning= FALSE}
 ## installation packages si manquants
-if (!require("tidyverse")) install.packages("tidyverse")
+if (!require("ggplot2")) install.packages("ggplot2")
+if (!require("dplyr")) install.packages("dplyr")
 if (!require("sf")) install.packages("sf")
 
 # chargement des packages
-library(tidyverse)
+library(ggplot2)
+library(dplyr)
 library(sf)
 ```
 
