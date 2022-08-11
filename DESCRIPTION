@@ -21,6 +21,7 @@ Imports:
     magrittr,
     sf
 Suggests: 
+    devtools,
     COGiter (>= 0.0.9),
     covr,
     ggplot2,

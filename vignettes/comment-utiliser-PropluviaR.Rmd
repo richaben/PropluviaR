@@ -126,3 +126,4 @@ plot_propluvia <-
 plot_propluvia  
 ```
 
+![](../man/figures/PropluviaR_map_exemple.png)

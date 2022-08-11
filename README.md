@@ -6,8 +6,7 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/richaben/PropluviaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/richaben/PropluviaR/actions/workflows/R-CMD-check.yaml)
-[![Codecov test
-coverage](https://codecov.io/gh/richaben/PropluviaR/branch/master/graph/badge.svg)](https://app.codecov.io/gh/richaben/PropluviaR?branch=master)
+[![test-coverage](https://github.com/richaben/PropluviaR/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/richaben/PropluviaR/actions/workflows/test-coverage.yaml)
 <!-- badges: end -->
 
 Le package `PropluviaR` vise à faciliter la récupération des données
