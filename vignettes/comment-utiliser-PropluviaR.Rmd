@@ -77,7 +77,7 @@ Quelques autres packages sont utiles pour la représentation cartographique : `t
 # if (!require("tidyverse")) install.packages("tidyverse")
 # if (!require("sf")) install.packages("sf")
 
-# chargement packages
+# chargement des packages
 library(ggplot2)
 library(dplyr)
 library(magrittr)
@@ -86,18 +86,19 @@ library(sf)
 
 Pour les limites départementales, le package `COGiter` est utilisé.
 
+```{r , eval=T, message=FALSE, warning= FALSE}
+#devtools::install_github("MaelTheuliere/COGiter")
+library(COGiter)
+```
+
 
 Voici un exemple de carte avec les données récupérées ! 
 
-```{r, fig.width=5.5, fig.height=4, dpi=150, message=FALSE, warning=FALSE}
-# installation si manquant
-#devtools::install_github("MaelTheuliere/COGiter")
-library(COGiter)
-
+```{r, fig.width=5.5, fig.height=4, dpi=150, message=FALSE, warning=FALSE, results='hide'}
 # shape pour les departements FR métropolitaine
 dept_shp <- 
   COGiter::departements_geo %>% 
-  filter(!DEP %in% c("971", "972", "973", "974", "976"))
+  dplyr::filter(!DEP %in% c("971", "972", "973", "974", "976"))
 
 # les données Propluvia du jour !
 propluvia_data_jour <- 
@@ -112,15 +113,16 @@ pal_colZone <-
 plot_propluvia <-
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = (propluvia_data_jour %>% 
-                    dplyr::filter(typeZone == 'SUP')),
-          aes(fill=nomNiveau),
-          col='black',size=0.1) +
+                             dplyr::filter(typeZone == 'SUP')),
+                   ggplot2::aes(fill=nomNiveau),
+                   col='black',size=0.1) +
   ggplot2::scale_fill_manual(values = pal_colZone, "Zones d'alerte") +
   ggplot2::geom_sf(data = dept_shp, col='black', size=0.6, fill=NA) +
-  ggplot2::labs(title = paste0("Carte Propluvia au ", format(Sys.time(),"%d/%m/%Y")), 
-       caption = "Source: http://propluvia.developpement-durable.gouv.fr") +
+  ggplot2::labs(title = paste0("Carte Propluvia au ", format(Sys.time(),"%d/%m/%Y"), " pour les eaux superficielles."), 
+                caption = "Source: http://propluvia.developpement-durable.gouv.fr") +
   ggplot2::theme_void() +
-  ggplot2::theme(title = element_text(face = 'bold'))
+  ggplot2::theme(title = ggplot2::element_text(face = 'bold'),
+                 legend.position = "bottom")
 
 plot_propluvia  
 ```
