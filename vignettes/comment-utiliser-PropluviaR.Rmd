@@ -85,7 +85,7 @@ library(sf)
 
 Pour les limites départementales, le package `COGiter` est utilisé.
 
-```{r , eval=T, message=FALSE, warning= FALSE}
+```{r , eval=T, message=FALSE, warning= FALSE,results='hide'}
 if (!require("COGiter")) devtools::install_github("MaelTheuliere/COGiter")
 library(COGiter)
 ```
@@ -93,7 +93,7 @@ library(COGiter)
 
 Voici un exemple de carte avec les données récupérées ! 
 
-```{r, fig.width=5.5, fig.height=4, dpi=150, message=FALSE, warning=FALSE, results='hide'}
+```{r, fig.width=5.5, fig.height=4, dpi=150, message=FALSE, warning=FALSE, results='hide', eval=FALSE}
 # shape pour les departements FR métropolitaine
 dept_shp <- 
   COGiter::departements_geo %>% 
