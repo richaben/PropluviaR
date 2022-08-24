@@ -21,6 +21,13 @@ une date spécifiée.
 L’export des données collectées est possible par la création d’une
 couche `.gpkg` pour une utilisation SIG.
 
+## ⚠️ Update 24 août 2022 ⚠️
+
+L’accès à la nouvelle page
+[Propluvia](https://propluvia.developpement-durable.gouv.fr/propluviapublic/accueil)
+est actuellement suspendu ; Le package n’est donc plus fonctionnel pour
+le moment…
+
 ## Installation ⚙️
 
 Pour l’installer :
