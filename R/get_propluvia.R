@@ -68,9 +68,18 @@ get_propluvia <- function(date, export = FALSE){
     response$contourZone$geometry %>%
     jsonlite::toJSON() %>%
     geojsonsf::geojson_sf() %>%
+    dplyr::bind_cols(idZone = response$idZone) %>%
+    dplyr::bind_cols(idDep = response$idDep) %>%
     dplyr::bind_cols(numeroNiveau = as.factor(response$numeroNiveau)) %>%
     dplyr::bind_cols(typeZone = response$typeZone) %>%
     dplyr::bind_cols(nomZone = response$nomZone) %>%
+    dplyr::bind_cols(codeZone = response$codeZone) %>%
+    dplyr::bind_cols(idBassin  = response$idBassin ) %>%
+    dplyr::bind_cols(idArrete = response$idArrete) %>%
+    dplyr::bind_cols(numeroArrete = response$numeroArrete) %>%
+    dplyr::bind_cols(debutValArrete  = response$debutValArrete ) %>%
+    dplyr::bind_cols(finValArrete = response$finValArrete) %>%
+    dplyr::bind_cols(listeCodeDep = response$listeCodeDep) %>%
     dplyr::mutate(nomNiveau = dplyr::case_when(numeroNiveau == "1" ~ 'Vigilance',
                                                numeroNiveau == "3" ~ 'Alerte',
                                                numeroNiveau == "4" ~ 'Alerte renforc\u00e9e',

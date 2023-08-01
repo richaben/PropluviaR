@@ -8,6 +8,7 @@
 [![R-CMD-check](https://github.com/richaben/PropluviaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/richaben/PropluviaR/actions/workflows/R-CMD-check.yaml)
 [![License: GPL
 v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
+
 <!-- badges: end -->
 
 Le package `PropluviaR` vise à faciliter la récupération des données
@@ -21,12 +22,18 @@ une date spécifiée.
 L’export des données collectées est possible par la création d’une
 couche `.gpkg` pour une utilisation SIG.
 
-## ⚠️ Update 24 août 2022 ⚠️
+## ⚠️ Update au 15 juillet 2023 ⚠️
 
-L’accès à la nouvelle page
+La page nouvelle page
+[Propluvia](https://propluvia.developpement-durable.gouv.fr/propluviapublic/accueil)
+est de nouveau fonctionnelle ! 🎆
+
+## ⚠️ ~~Update au 24 août 2022~~ ⚠️
+
+~~L’accès à la nouvelle page
 [Propluvia](https://propluvia.developpement-durable.gouv.fr/propluviapublic/accueil)
 est actuellement suspendu ; Le package n’est donc plus fonctionnel pour
-le moment…
+le moment…~~
 
 ## Installation ⚙️
 
@@ -45,25 +52,25 @@ library(PropluviaR)
 
 ## Exemples
 
-### Téléchargements des données 🖥️
+### Téléchargements des données à l’échelle nationale 🖥️
 
--   Récupération des données du jour, sans export :
+- Récupération des données du jour sans export :
 
 ``` r
 propluvia_data_jour <- 
   get_propluvia(export = FALSE)
 ```
 
--   Récupération des données à une date précise (ici le 23 juillet
-    2022), sans export :
+- Récupération des données à une date précise (ici le 23 juillet 2022),
+  sans export :
 
 ``` r
 propluvia_data_20220723 <- 
   get_propluvia(date = '2022-07-23', export = FALSE)
 ```
 
--   Export au format geopackage `.gpkg` (à récupérer dans le dossier de
-    travail) :
+- Export au format geopackage `.gpkg` (à récupérer dans le dossier de
+  travail) :
 
 ``` r
 get_propluvia(export = TRUE)
@@ -93,11 +100,11 @@ pal_colZone <-
 plot_propluvia <-
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = (propluvia_data_jour %>% 
-                             dplyr::filter(typeZone == 'SUP')),
+                             dplyr::filter(typeZone == 'SUP' & listeCodeDep != 976)),
                    ggplot2::aes(fill=nomNiveau),
                    col='black',size=0.1) +
   ggplot2::scale_fill_manual(values = pal_colZone, "Zones d'alerte") +
-  ggplot2::geom_sf(data = dept_shp, col='black', size=0.6, fill=NA) +
+  ggplot2::geom_sf(data = dept_shp, col='black', size=0.5, fill=NA) +
   ggplot2::labs(title = paste0("Carte Propluvia au ", format(Sys.time(),"%d/%m/%Y"), " pour les eaux superficielles."), 
                 caption = "Source: http://propluvia.developpement-durable.gouv.fr") +
   ggplot2::theme_void() +
@@ -107,4 +114,13 @@ plot_propluvia <-
 plot_propluvia
 ```
 
-<img src="man/figures/PropluviaR_map_exemple.png" width="100%" />
+<img src="man/figures/PropluviaR_map_exemple.png" width="100%"/>
+
+### Téléchargements des données pour un département 🖥️
+
+``` r
+propluvia_dpt14 <- 
+  get_propluvia_dpt(dpt = '14', 
+                    date = '2023-07-31', 
+                    export = FALSE)
+```
