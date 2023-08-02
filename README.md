@@ -16,17 +16,17 @@ Le package `PropluviaR` vise à faciliter la récupération des données
 sur les restrictions d’eau à partir du site du gouvernement.
 
 Il utilise l’API du site pour récupérer notamment les zones d’alerte
-pour les eaux superficielles et souterraines à l’échelle de la France à
-une date spécifiée.
+pour les eaux superficielles et souterraines, à l’échelle de la France
+entière ou pour un département, à une date spécifiée.
 
 L’export des données collectées est possible par la création d’une
-couche `.gpkg` pour une utilisation SIG.
+couche `.gpkg` pour une utilisation sous SIG.
 
 ## ⚠️ Update au 15 juillet 2023 ⚠️
 
 La page nouvelle page
 [Propluvia](https://propluvia.developpement-durable.gouv.fr/propluviapublic/accueil)
-est de nouveau fonctionnelle ! 🎆
+est de nouveau fonctionnelle ! 🎆✨🎇
 
 ## ⚠️ ~~Update au 24 août 2022~~ ⚠️
 
@@ -50,11 +50,9 @@ Pour le charger :
 library(PropluviaR)
 ```
 
-## Exemples
+## Exemples de téléchargements des données 🖥
 
-### Téléchargements des données 🖥
-
-#### à l’échelle nationale ️
+### à l’échelle nationale ️
 
 - Récupération des données du jour sans export :
 
@@ -78,7 +76,7 @@ propluvia_data_20220723 <-
 get_propluvia(export = TRUE)
 ```
 
-#### pour un département 🖥️
+### pour un département 🖥️
 
 ``` r
 propluvia_dpt14 <- 
@@ -87,7 +85,7 @@ propluvia_dpt14 <-
                     export = FALSE)
 ```
 
-### Un exemple de carte 🗺️
+## Un exemple de carte 🗺️
 
 ``` r
 #devtools::install_github("MaelTheuliere/COGiter")
