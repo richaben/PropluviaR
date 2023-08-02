@@ -52,7 +52,9 @@ library(PropluviaR)
 
 ## Exemples
 
-### Téléchargements des données à l’échelle nationale 🖥️
+### Téléchargements des données 🖥
+
+#### à l’échelle nationale ️
 
 - Récupération des données du jour sans export :
 
@@ -74,6 +76,15 @@ propluvia_data_20220723 <-
 
 ``` r
 get_propluvia(export = TRUE)
+```
+
+#### pour un département 🖥️
+
+``` r
+propluvia_dpt14 <- 
+  get_propluvia_dpt(dpt = '14', 
+                    date = '2023-07-31', 
+                    export = FALSE)
 ```
 
 ### Un exemple de carte 🗺️
@@ -115,12 +126,3 @@ plot_propluvia
 ```
 
 <img src="man/figures/PropluviaR_map_exemple.png" width="100%"/>
-
-### Téléchargements des données pour un département 🖥️
-
-``` r
-propluvia_dpt14 <- 
-  get_propluvia_dpt(dpt = '14', 
-                    date = '2023-07-31', 
-                    export = FALSE)
-```
