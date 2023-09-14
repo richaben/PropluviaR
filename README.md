@@ -61,12 +61,12 @@ propluvia_data_jour <-
   get_propluvia(export = FALSE)
 ```
 
-- Récupération des données à une date précise (ici le 23 juillet 2022),
+- Récupération des données à une date précise (ici le 23 juillet 2023),
   sans export :
 
 ``` r
-propluvia_data_20220723 <- 
-  get_propluvia(date = '2022-07-23', export = FALSE)
+propluvia_data_20230723 <- 
+  get_propluvia(date = '2023-07-23', export = FALSE)
 ```
 
 - Export au format geopackage `.gpkg` (à récupérer dans le dossier de
